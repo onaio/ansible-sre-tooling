@@ -1,0 +1,23 @@
+---
+- name: Download the package
+  template:
+    src: "sre_tooling_install_dir/sre_tooling_infra_index_service_name"
+    dest: "{{ sre_tooling_install_dir }}/{{ sre_tooling_infra_index_service_name }}"
+    mode: 0551
+    owner: "{{ sre_tooling_system_user }}"
+    group: "{{ sre_tooling_system_group }}"
+
+- name: Copy the systemd service and timer files
+  template:
+    src: "etc/systemd/system/sre_tooling_infra_index_service_name.{{ _cur_file }}.j2"
+    dest: "/etc/systemd/system/{{ sre_tooling_infra_index_service_name }}.{{ _cur_file }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop_control:
+    loop_var: _cur_file
+  loop:
+    - service
+    - timer
+  notify:
+    - restart sre_tooling_infra_index_service_name systemd timer

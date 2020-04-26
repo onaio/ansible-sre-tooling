@@ -1,9 +1,13 @@
 ---
-# This is an example playbook to execute Ansible tests.
+# This is a playbook to execute Ansible tests.
 
 - name: Verify
   hosts: all
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+    - name: Run systemctl is-enabled on sre-tooling-infra-index-update.timer
+      command: systemctl is-enabled sre-tooling-infra-index-update.timer
+      register: _infra_index_systemd_timer_status
+
+    - name: Check if sre-tooling-infra-index-update.timer is enabled
+      assert:
+        that: _infra_index_systemd_timer_status.rc == 0

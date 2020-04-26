@@ -1,2 +1,23 @@
 ---
 # defaults file for role
+sre_tooling_install_dir: "/usr/local/bin"
+sre_tooling_system_user: "root"
+sre_tooling_system_group: "root"
+sre_tooling_version: "0.4.0"
+sre_tooling_download_url: "https://github.com/onaio/sre-tooling/releases/download/v{{ sre_tooling_version }}/sre-tooling_{{ sre_tooling_version }}_linux_amd64.tar.gz"
+sre_tooling_enabled_services: []
+
+# infra update service
+sre_tooling_infra_update_region: eu-west-1
+sre_tooling_infra_update_systemd_on_boot_sec: 5min
+sre_tooling_infra_update_systemd_on_active_sec: 1h
+sre_tooling_infra_update_systemd_rand_sec: 5min
+sre_tooling_infra_update_instance_group: ""
+sre_tooling_infra_update_env:
+  AWS_REGION: "{{ sre_tooling_infra_update_region }}"
+  INSTANCE_ID: "$(/usr/bin/ec2metadata --instance-id)"
+  INSTANCE_GROUP: "{{ sre_tooling_infra_update_instance_group }}"
+sre_tooling_infra_update_flags: "-filter-region=\"${AWS_REGION}\" -filter-tag=\"Group:${INSTANCE_GROUP}\" -id=\"${INSTANCE_ID}\" -index-tag=Index -update-tag=\"Name:${INSTANCE_GROUP}-:\" -filter-provider=AWS -filter-type=EC2"
+sre_tooling_infra_update_set_hostname: true
+sre_tooling_infra_update_hostname_prefix: "${INSTANCE_GROUP}-"
+sre_tooling_infra_update_default_hostname: "{{ sre_tooling_infra_update_hostname_prefix }}0"

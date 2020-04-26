@@ -1,0 +1,17 @@
+---
+- name: Download the package
+  unarchive:
+    src: "{{ sre_tooling_download_url }}"
+    dest: "/tmp"
+    remote_src: true
+    owner: "{{ sre_tooling_system_user }}"
+    group: "{{ sre_tooling_system_group }}"
+
+- name: Copy the SRE Tooling binary
+  copy:
+    src: "/tmp/sre-tooling"
+    remote_src: true
+    dest: "{{ sre_tooling_install_path }}"
+    owner: "{{ sre_tooling_system_user }}"
+    group: "{{ sre_tooling_system_group }}"
+    mode: 0551

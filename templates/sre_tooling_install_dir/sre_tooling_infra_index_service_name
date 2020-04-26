@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+{% if sre_tooling_infra_update_env is iterable %}
+{% for envKey,envValue in sre_tooling_infra_update_env.items() %}
+export {{ envKey }}={{ envValue }}
+{% endfor %}
+{% endif %}
+
+{{ sre_tooling_install_path }} infra index update {{ sre_tooling_infra_update_flags }} > /tmp/sre-tooling-infra-index-update.index
+{% if sre_tooling_infra_update_set_hostname %}
+
+newHostname="{{ sre_tooling_infra_update_default_hostname }}"
+instanceIndex=$(cat /tmp/sre-tooling-infra-index-update.index)
+re='^[0-9]+$'
+
+if [[ $instanceIndex =~ $re ]] ; then
+  newHostname="{{ sre_tooling_infra_update_hostname_prefix }}${instanceIndex}"
+fi
+
+hostname "${newHostname}"
+{% endif %}

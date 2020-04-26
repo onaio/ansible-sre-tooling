@@ -1,2 +1,10 @@
 ---
 # tasks file for role
+- name: Install SRE Tooling
+  include_tasks: install.yml
+
+- name: Install SRE Tooling services
+  include_tasks: service/{{ _cur_service }}.yml
+  loop: "{{ sre_tooling_enabled_services }}"
+  loop_control:
+    loop_var: _cur_service

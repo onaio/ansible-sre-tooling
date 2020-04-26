@@ -1,0 +1,14 @@
+
+[Unit]
+Description=SRE Tooling infrastructure index update service
+After=network.target
+
+[Service]
+User={{ sre_tooling_system_user }}
+Group={{ sre_tooling_system_group }}
+Type=simple
+ExecStart={{ sre_tooling_install_dir }}/sre-tooling-infra-index-update
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target

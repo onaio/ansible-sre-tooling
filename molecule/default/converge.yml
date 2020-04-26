@@ -1,7 +1,10 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    sre_tooling_enabled_services:
+      - infra-index-update
   tasks:
     - name: "Include role"
       include_role:
-        name: "ansible-role"
+        name: "ansible-sre-tooling"

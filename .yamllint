@@ -31,4 +31,4 @@ rules:
     type: unix
   trailing-spaces: enable
   truthy:
-    check-keys: false 
+    check-keys: false
