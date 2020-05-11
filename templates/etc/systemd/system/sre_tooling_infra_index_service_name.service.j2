@@ -8,6 +8,7 @@ User={{ sre_tooling_system_user }}
 Group={{ sre_tooling_system_group }}
 Type=simple
 ExecStart={{ sre_tooling_install_dir }}/sre-tooling-infra-index-update
+EnvironmentFile=-{{ sre_tooling_environment_file }}
 KillSignal=SIGTERM
 
 [Install]

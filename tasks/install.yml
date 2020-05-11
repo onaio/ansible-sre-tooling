@@ -15,3 +15,11 @@
     owner: "{{ sre_tooling_system_user }}"
     group: "{{ sre_tooling_system_group }}"
     mode: 0551
+
+- name: Create the SRE Tooling environment file
+  file:
+    path: "{{ sre_tooling_environment_file }}"
+    state: touch
+    owner: "{{ sre_tooling_system_user }}"
+    group: "{{ sre_tooling_system_group }}"
+    mode: 0640

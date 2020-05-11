@@ -5,14 +5,17 @@ sre_tooling_system_user: "root"
 sre_tooling_system_group: "root"
 sre_tooling_version: "0.4.0"
 sre_tooling_download_url: "https://github.com/onaio/sre-tooling/releases/download/v{{ sre_tooling_version }}/sre-tooling_{{ sre_tooling_version }}_linux_amd64.tar.gz"
+sre_tooling_environment_file: "/etc/default/sre-tooling"
+# Which SRE Tooling services to install. Possible values are:
+#  - infra-index-update: Updates the index of the host in a group and possibly its hostname
 sre_tooling_enabled_services: []
 
 # infra update service
-sre_tooling_infra_update_region: eu-west-1
-sre_tooling_infra_update_systemd_on_boot_sec: 5min
+sre_tooling_infra_update_region: "${SRE_TOOLING_REGION}"
+sre_tooling_infra_update_systemd_on_boot_sec: 2min
 sre_tooling_infra_update_systemd_on_active_sec: 1h
 sre_tooling_infra_update_systemd_rand_sec: 5min
-sre_tooling_infra_update_instance_group: ""
+sre_tooling_infra_update_instance_group: "${SRE_TOOLING_SERVER_GROUP}"
 sre_tooling_infra_update_env:
   AWS_REGION: "{{ sre_tooling_infra_update_region }}"
   INSTANCE_ID: "$(/usr/bin/ec2metadata --instance-id)"
