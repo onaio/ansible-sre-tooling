@@ -1,0 +1,15 @@
+
+[Unit]
+Description=SRE Tooling NiFi flow bulletin monitoring service
+After=network.target
+
+[Service]
+User={{ sre_tooling_system_user }}
+Group={{ sre_tooling_system_group }}
+Type=simple
+ExecStart={{ sre_tooling_install_path }} monitoring nifi bulletin flow ingest -persistence-dir="{{ sre_tooling_monitor_nifi_fb_ingest_data_dir }}"
+EnvironmentFile=-{{ sre_tooling_environment_file }}
+KillSignal=SIGTERM
+
+[Install]
+WantedBy=multi-user.target

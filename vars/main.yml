@@ -2,3 +2,4 @@
 # vars file for role
 sre_tooling_install_path: "{{ sre_tooling_install_dir }}/sre-tooling"
 sre_tooling_infra_index_service_name: "sre-tooling-infra-index-update"
+sre_tooling_monitor_nifi_fb_ingest_service_name: "sre-tooling-monitor-nifi-fb-ingest"

@@ -17,9 +17,17 @@
     mode: 0551
 
 - name: Create the SRE Tooling environment file
-  file:
-    path: "{{ sre_tooling_environment_file }}"
-    state: touch
+  template:
+    src: "sre_tooling_environment_file"
+    dest: "{{ sre_tooling_environment_file }}"
     owner: "{{ sre_tooling_system_user }}"
     group: "{{ sre_tooling_system_group }}"
     mode: 0640
+
+- name: Create the SRE Tooling data directory
+  file:
+    path: "{{ sre_tooling_data_dir }}"
+    state: directory
+    owner: "{{ sre_tooling_system_user }}"
+    group: "{{ sre_tooling_system_group }}"
+    mode: 0750
