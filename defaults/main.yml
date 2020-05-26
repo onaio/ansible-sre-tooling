@@ -4,7 +4,7 @@ sre_tooling_install_dir: "/usr/local/bin"
 sre_tooling_data_dir: "/var/lib/sre-tooling"
 sre_tooling_system_user: "root"
 sre_tooling_system_group: "root"
-sre_tooling_version: "0.4.0"
+sre_tooling_version: "0.7.0"
 sre_tooling_download_url: "https://github.com/onaio/sre-tooling/releases/download/v{{ sre_tooling_version }}/sre-tooling_{{ sre_tooling_version }}_linux_amd64.tar.gz"
 sre_tooling_environment_file: "/etc/default/sre-tooling"
 # List of global (available to all services) environment vairables
