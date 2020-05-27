@@ -1,0 +1,15 @@
+---
+- name: Copy the systemd service and timer files
+  template:
+    src: "etc/systemd/system/sre_tooling_monitor_nifi_fb_ingest_service_name.{{ _cur_file }}.j2"
+    dest: "/etc/systemd/system/{{ sre_tooling_monitor_nifi_fb_ingest_service_name }}.{{ _cur_file }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop_control:
+    loop_var: _cur_file
+  loop:
+    - service
+    - timer
+  notify:
+    - restart sre_tooling_monitor_nifi_fb_ingest_service_name systemd timer

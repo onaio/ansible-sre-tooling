@@ -4,10 +4,18 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: Run systemctl is-enabled on sre-tooling-infra-index-update.timer
-      command: systemctl is-enabled sre-tooling-infra-index-update.timer
-      register: _infra_index_systemd_timer_status
+    - name: Run systemctl is-enabled
+      command: "systemctl is-enabled {{ _cur_service }}"
+      register: _service_statuses
+      loop:
+        - sre-tooling-infra-index-update.timer
+        - sre-tooling-monitor-nifi-fb-ingest.timer
+      loop_control:
+        loop_var: _cur_service
 
-    - name: Check if sre-tooling-infra-index-update.timer is enabled
+    - name: Check if systemd service/timer is enabled
       assert:
-        that: _infra_index_systemd_timer_status.rc == 0
+        that: _cur_service_status.rc == 0
+      loop: "{{ _service_statuses.results }}"
+      loop_control:
+        loop_var: _cur_service_status

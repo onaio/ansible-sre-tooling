@@ -4,6 +4,7 @@
   vars:
     sre_tooling_enabled_services:
       - infra-index-update
+      - monitor-nifi-fb-ingest
   tasks:
     - name: "Include role"
       include_role:

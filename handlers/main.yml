@@ -6,3 +6,10 @@
     daemon_reload: true
     enabled: true
     state: restarted
+
+- name: restart sre_tooling_monitor_nifi_fb_ingest_service_name systemd timer
+  systemd:
+    name: "{{ sre_tooling_monitor_nifi_fb_ingest_service_name }}.timer"
+    daemon_reload: true
+    enabled: true
+    state: restarted

@@ -1,11 +1,17 @@
 ---
 # defaults file for role
 sre_tooling_install_dir: "/usr/local/bin"
+sre_tooling_data_dir: "/var/lib/sre-tooling"
 sre_tooling_system_user: "root"
 sre_tooling_system_group: "root"
-sre_tooling_version: "0.4.0"
+sre_tooling_version: "0.7.0"
 sre_tooling_download_url: "https://github.com/onaio/sre-tooling/releases/download/v{{ sre_tooling_version }}/sre-tooling_{{ sre_tooling_version }}_linux_amd64.tar.gz"
 sre_tooling_environment_file: "/etc/default/sre-tooling"
+# List of global (available to all services) environment vairables
+sre_tooling_environment:
+  SRE_MONITORING_NIFI_FLOW_BULLETIN_URL: "http://127.0.0.1:8080/nifi-api/flow/bulletin-board"
+  SRE_MONITORING_NIFI_FLOW_BULLETIN_SENTRY_DSN: "{{ sre_tooling_monitor_nifi_fb_ingest_sentry_dsn }}"
+  SRE_NIFI_SYSTEM_DIAGNOSTICS_URL: "http://127.0.0.1:8080/nifi-api/system-diagnostics"
 # Which SRE Tooling services to install. Possible values are:
 #  - infra-index-update: Updates the index of the host in a group and possibly its hostname
 sre_tooling_enabled_services: []
@@ -24,3 +30,11 @@ sre_tooling_infra_update_flags: "-filter-region=\"${AWS_REGION}\" -filter-tag=\"
 sre_tooling_infra_update_set_hostname: true
 sre_tooling_infra_update_hostname_prefix: "${INSTANCE_GROUP}-"
 sre_tooling_infra_update_default_hostname: "{{ sre_tooling_infra_update_hostname_prefix }}0"
+
+# monitoring nifi bulletin flow ingest service
+# FB stands for Flow Bulletin
+sre_tooling_monitor_nifi_fb_ingest_sentry_dsn: ""
+sre_tooling_monitor_nifi_fb_ingest_data_dir: "{{ sre_tooling_data_dir }}"
+sre_tooling_monitor_nifi_fb_ingest_systemd_on_boot_sec: 2min
+sre_tooling_monitor_nifi_fb_ingest_systemd_on_active_sec: 1min
+sre_tooling_monitor_nifi_fb_ingest_systemd_rand_sec: 0sec

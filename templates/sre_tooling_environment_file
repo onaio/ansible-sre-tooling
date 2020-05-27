@@ -1,0 +1,5 @@
+{% if sre_tooling_environment is iterable %}
+{% for envKey,envValue in sre_tooling_environment.items() %}
+{{ envKey }}={{ envValue }}
+{% endfor %}
+{% endif %}
