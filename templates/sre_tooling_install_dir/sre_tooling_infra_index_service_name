@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 {% if sre_tooling_infra_update_env is iterable %}
 {% for envKey,envValue in sre_tooling_infra_update_env.items() %}
 export {{ envKey }}={{ envValue }}
@@ -9,15 +7,23 @@ export {{ envKey }}={{ envValue }}
 {% endif %}
 
 {{ sre_tooling_install_path }} infra index update {{ sre_tooling_infra_update_flags }} > /tmp/sre-tooling-infra-index-update.index
+instanceIndex=$(cat /tmp/sre-tooling-infra-index-update.index)
+echo "Output for the sre-tooling index update command is: '$instanceIndex'"
 {% if sre_tooling_infra_update_set_hostname %}
 
 newHostname="{{ sre_tooling_infra_update_default_hostname }}"
-instanceIndex=$(cat /tmp/sre-tooling-infra-index-update.index)
 re='^[0-9]+$'
 
 if [[ $instanceIndex =~ $re ]] ; then
   newHostname="{{ sre_tooling_infra_update_hostname_prefix }}${instanceIndex}"
 fi
 
-hostname "${newHostname}"
+curHostname=$(hostname)
+
+if ! [ "${curHostname}" == "${newHostname}" ] ; then
+  hostname "${newHostname}"
+  echo "Updated hostname to '$newHostname'"
+else
+  echo "Hostname does not need updating"
+fi
 {% endif %}
