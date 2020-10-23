@@ -19,6 +19,7 @@ sre_tooling_enabled_services: []
 # infra update service
 sre_tooling_infra_update_region: "${SRE_TOOLING_REGION}"
 sre_tooling_infra_update_systemd_on_calendar: "hourly"
+sre_tooling_infra_update_systemd_on_boot_sec: 2min
 sre_tooling_infra_update_systemd_rand_sec: 5min
 sre_tooling_infra_update_instance_group: "${SRE_TOOLING_SERVER_GROUP}"
 sre_tooling_infra_update_env:
