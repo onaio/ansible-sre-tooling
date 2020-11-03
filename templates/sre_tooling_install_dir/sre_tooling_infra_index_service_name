@@ -22,6 +22,9 @@ curHostname=$(hostname)
 
 if ! [ "${curHostname}" == "${newHostname}" ] ; then
   hostname "${newHostname}"
+{% for curCommand in sre_tooling_infra_update_post_commands %}
+  {{ curCommand }}
+{% endfor %}
   echo "Updated hostname to '$newHostname'"
 else
   echo "Hostname does not need updating"
