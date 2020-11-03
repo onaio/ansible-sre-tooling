@@ -30,6 +30,8 @@ sre_tooling_infra_update_flags: "-filter-region=\"${AWS_REGION}\" -filter-tag=\"
 sre_tooling_infra_update_set_hostname: true
 sre_tooling_infra_update_hostname_prefix: "${INSTANCE_GROUP}-"
 sre_tooling_infra_update_default_hostname: "{{ sre_tooling_infra_update_hostname_prefix }}0"
+sre_tooling_infra_update_post_commands:
+  - "systemctl restart collectd.service"
 
 # monitoring nifi bulletin flow ingest service
 # FB stands for Flow Bulletin
