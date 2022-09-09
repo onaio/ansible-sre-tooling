@@ -4,8 +4,9 @@ sre_tooling_install_dir: "/usr/local/bin"
 sre_tooling_data_dir: "/var/lib/sre-tooling"
 sre_tooling_system_user: "root"
 sre_tooling_system_group: "root"
-sre_tooling_version: "0.7.1"
-sre_tooling_download_url: "https://github.com/onaio/sre-tooling/releases/download/v{{ sre_tooling_version }}/sre-tooling_{{ sre_tooling_version }}_linux_amd64.tar.gz"
+# Asset ID for v0.14.0 Linux
+sre_tooling_asset_id: "46865298"
+sre_tooling_download_url: "https://api.github.com/repos/onaio/sre-tooling/releases/assets/{{ sre_tooling_asset_id }}"
 sre_tooling_environment_file: "/etc/default/sre-tooling"
 # List of global (available to all services) environment vairables
 sre_tooling_environment:
@@ -43,3 +44,4 @@ sre_tooling_monitor_nifi_fb_ingest_systemd_rand_sec: 0sec
 # Package download headers
 sre_tooling_download_headers:
   Authorization: "Token SOME_PERSONAL_ACCESS_TOKEN"
+  Accept: "application/octet-stream"
