@@ -1,9 +1,14 @@
 ---
 - name: Download the package
+  get_url:
+    url: "{{ sre_tooling_download_url }}"
+    headers: "{{ sre_tooling_download_headers }}"
+    dest: "/tmp/sre-tooling.tar.gz"
+
+- name: Unarchive the package
   unarchive:
-    src: "{{ sre_tooling_download_url }}"
+    src: "/tmp/sre-tooling.tar.gz"
     dest: "/tmp"
-    remote_src: true
     owner: "{{ sre_tooling_system_user }}"
     group: "{{ sre_tooling_system_group }}"
 

@@ -39,3 +39,7 @@ sre_tooling_monitor_nifi_fb_ingest_sentry_dsn: ""
 sre_tooling_monitor_nifi_fb_ingest_data_dir: "{{ sre_tooling_data_dir }}"
 sre_tooling_monitor_nifi_fb_ingest_systemd_on_calendar: "minutely"
 sre_tooling_monitor_nifi_fb_ingest_systemd_rand_sec: 0sec
+
+# Package download headers
+sre_tooling_download_headers:
+  Authorization: "Token SOME_PERSONAL_ACCESS_TOKEN"
