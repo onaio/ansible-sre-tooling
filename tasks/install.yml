@@ -1,16 +1,7 @@
 ---
-- name: Download the package
-  get_url:
-    url: "{{ sre_tooling_download_url }}"
-    headers: "{{ sre_tooling_download_headers }}"
-    dest: "/tmp/sre-tooling.tar.gz"
-
-- name: Unarchive the package
-  unarchive:
-    src: "/tmp/sre-tooling.tar.gz"
-    dest: "/tmp"
-    owner: "{{ sre_tooling_system_user }}"
-    group: "{{ sre_tooling_system_group }}"
+- name: Download and unarchive the package
+  shell: "cd /tmp && wget -q --auth-no-challenge --header=\"Accept:application/octet-stream\" https://{{ sre_tooling_bearer_token }}:@api.github.com/repos/onaio/sre-tooling/releases/assets/{{ sre_tooling_asset_id }} -O - | tar xz"
+  changed_when: false
 
 - name: Copy the SRE Tooling binary
   copy:
